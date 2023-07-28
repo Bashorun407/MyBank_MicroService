@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bank-service-registry" />
+        <module name="bank-identity-service-registry" />
+        <module name="bank-notification-service-registry" />
+        <module name="bank-transaction-service-registry" />
+        <module name="bank-payment-service-registry" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bank-identity-service-registry" target="17" />
+      <module name="bank-notification-service-registry" target="17" />
+      <module name="bank-payment-service-registry" target="17" />
+      <module name="bank-service-registry" target="17" />
+      <module name="bank-transaction-service-registry" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="bank-identity-service-registry" options="-parameters" />
+      <module name="bank-notification-service-registry" options="-parameters" />
+      <module name="bank-payment-service-registry" options="-parameters" />
+      <module name="bank-service-registry" options="-parameters" />
+      <module name="bank-transaction-service-registry" options="-parameters" />
+    </option>
+  </component>
+</project>

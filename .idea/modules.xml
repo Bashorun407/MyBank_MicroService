@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/MyBank-Microservice.iml" filepath="$PROJECT_DIR$/.idea/MyBank-Microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bank-identity-service-registry/bank-identity-service-registry.iml" filepath="$PROJECT_DIR$/bank-identity-service-registry/bank-identity-service-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bank-notification-service-registry/bank-notification-service-registry.iml" filepath="$PROJECT_DIR$/bank-notification-service-registry/bank-notification-service-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bank-payment-service-registry/bank-payment-service-registry.iml" filepath="$PROJECT_DIR$/bank-payment-service-registry/bank-payment-service-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bank-service-registry/bank-service-registry.iml" filepath="$PROJECT_DIR$/bank-service-registry/bank-service-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bank-transaction-service-registry/bank-transaction-service-registry.iml" filepath="$PROJECT_DIR$/bank-transaction-service-registry/bank-transaction-service-registry.iml" />
+    </modules>
+  </component>
+</project>
