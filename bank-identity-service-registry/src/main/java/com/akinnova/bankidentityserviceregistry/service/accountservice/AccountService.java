@@ -22,7 +22,7 @@ public class AccountService implements IAccountService{
     public ResponseEntity<?> accountDetails(String accountNumber) {
 
         // TODO: 7/29/2023 There should be a means to validate the user asking for account details
-        Optional<Account> accountOptional = accountRepository.findByAccount(accountNumber);
+        Optional<Account> accountOptional = accountRepository.findByAccountNumber(accountNumber);
         accountOptional.orElseThrow(()-> new ApiException(String.format("Account with account-number: %s does not exist",
                 accountNumber)));
 

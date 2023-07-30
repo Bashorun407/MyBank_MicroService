@@ -1,9 +1,6 @@
 package com.akinnova.bankidentityserviceregistry.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,6 +13,7 @@ import lombok.Data;
 })
 public class UserRole {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String role;
 }

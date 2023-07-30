@@ -20,6 +20,9 @@ import java.util.Set;
         }
 )
 public class UserLogin {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String email;
     private String password;
     @CreationTimestamp
@@ -27,7 +30,7 @@ public class UserLogin {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable( name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "uniqueId"),
+            joinColumns = @JoinColumn(name = "user_mail", referencedColumnName = "email"),
             inverseJoinColumns = @JoinColumn(name = "user_role", referencedColumnName = "role")
     )
     private Set<UserRole> roles;
