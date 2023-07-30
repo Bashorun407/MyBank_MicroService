@@ -8,17 +8,19 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-
+import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 @Entity
-@Table
-public class User {
+@Table (name = "user_table",
+        uniqueConstraints = {
+        @UniqueConstraint(columnNames = "uniqueId")
+        }
+)
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,19 +30,27 @@ public class User {
     private String lastName;
     private String otherName;
     private String gender;
+    private String dateOfBirth;
     private String home_address;
     private String stateOfOrigin;
-    private String accountNumber;
-    private BigDecimal accountBalance;
-    private String email;
-    private String password;
+    private String uniqueId;
     private String phoneNumber;
     private String alternativeNumber;
-    private String status;
-    private LocalDate dateOfBirth;
+    private String email;
+    private String password;
+    private String accountType;
+    private String userStatus;
+    private String createdBy;
     @CreationTimestamp
     private LocalDateTime createdAt;
+    private String modifiedBy;
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable( name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "uniqueId"),
+            inverseJoinColumns = @JoinColumn(name = "user_role", referencedColumnName = "role")
+    )
+    private Set<UserRole> roles;
 }
