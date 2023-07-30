@@ -8,4 +8,3 @@ public class TransactionRequest {
     private String accountNumber;
     private BigDecimal amount;
 }
-}
