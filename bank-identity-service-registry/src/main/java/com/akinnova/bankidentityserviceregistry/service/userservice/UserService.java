@@ -17,7 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
+import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -32,13 +32,15 @@ public class UserService implements IUserService {
     private final AccountRepository accountRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RestTemplate restTemplate;
 
     //Class Constructor
-    public UserService(UserRepository userRepository, AccountRepository accountRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, AccountRepository accountRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, RestTemplate restTemplate) {
         this.userRepository = userRepository;
         this.accountRepository = accountRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -118,12 +120,11 @@ public class UserService implements IUserService {
     @Override
     public ResponseEntity<?> findUserByUniqueId(String id) {
         Optional<UserEntity> userOptional = userRepository.findByUniqueId(id);
+        //if user does not exist, throws an exception
+        userOptional.orElseThrow(()-> new ApiException(String.format("User with this id: %s does not exist", id)));
         //User to return
         UserEntity user = userOptional.get();
-        //if user does not exist, return a reply
-        if(ObjectUtils.isEmpty(user))
-            return new ResponseEntity<>(String.format("User with this id: %s does not exist", id),
-                    HttpStatus.NOT_FOUND);
+
         //checking that IN-ACTIVE USERS ARE NOT CALLED
         if(user.getUserStatus().equals(ResponseUtils.NON_ACTIVE))
             return new ResponseEntity<>(String.format("Account of this user with id: %s has been deactivated.", id),
@@ -217,7 +218,7 @@ public class UserService implements IUserService {
         userToDelete.setModifiedAt(LocalDateTime.now());
 
         //Save to repository
-        UserEntity user = userRepository.save(userToDelete);
+        userRepository.save(userToDelete);
 
         //Retrieve account of user and de-activate user's account
         //Also update Account details of user
